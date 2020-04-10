@@ -7,8 +7,16 @@ library(tibble)
 library(biomaRt)
 library(reshape2)
 
+invivo <- loadRDS("SeuratLiverSamples.rds")
+invitro <- loadRDS("CITEseqSeuratObject.rds")
+
+# Filter only cells tagged as HSC/MPP
+InVivoHSCMPP <- subset(invivo, idents = "HSC/MPP")
+InVitroHSCMPP <- subset(invivo, idents = "HSC/MPP")
+
 seurat.list <- c(InVitroHSCMPP, InVivoHSCMPP)
 rm (InVitroHSCMPP, InVivoHSCMPP)
+
 integration.features <- SelectIntegrationFeatures(object.list = seurat.list, 
                                                   nfeatures = 3000)
 seurat.list <- PrepSCTIntegration(object.list = seurat.list,

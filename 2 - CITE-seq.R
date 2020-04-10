@@ -50,3 +50,5 @@ seuratObj <- RunUMAP(object = seuratObj, dims = 1:15)
 seuratObj <- FindNeighbors(object = seuratObj, dims = 1:15, verbose = FALSE)
 seuratObj <- FindClusters(object = seuratObj, verbose = FALSE)
 DimPlot(object = seuratObj, label = TRUE)
+
+saveRDS(seuratObj, "CITEseqSeuratObject.rds")
